@@ -1,0 +1,198 @@
+Student ID 		:	200240320035
+Student Name 		:	Dipesh chaudhari
+Center 			:	Kharghar
+Exercise		:	SQL_Exercise_1
+==========================================================
+1. Create the table SEMP with the following structure:-
+EMPNO CHAR(4)
+EMPNAME CHAR(20)
+BASIC FLOAT(9,2)
+DEPTNO CHAR(2)
+DEPTHEAD CHAR(4)
+=>>
+create table semp
+(EMPNO CHAR(4),
+EMPNAME CHAR(20),
+BASIC FLOAT(9,2),
+DEPTNO CHAR(2),
+DEPTHEAD CHAR(4)
+);
+
+==========================================================
+
+2. Create the table SDEPT with the following structure:-
+DEPTNO CHAR(2)
+DEPTNAME CHAR(15)
+=>>
+create table sdept
+(DEPTNO CHAR(2),
+DEPTNAME CHAR(15)
+);
+
+==========================================================
+
+3. Insert into the SDEPT table the following values:-
+10, Development
+20, Training
+=>>
+insert into sdept(deptno, deptname)
+values(10, 'Development'),
+		(20, 'Training');
+
+==========================================================
+
+4. Insert into the SEMP table the following values:-
+0001, SUNIL, 6000, 10
+0002, HIREN, 8000, 20
+0003, ALI, 4000, 10, 0001
+0004, GEORGE, 6000, 0002
+
+=>>
+insert into semp(EMPNO,EMPNAME,BASIC,DEPTNO,DEPTHEAD)values
+(0001, 'SUNIL', 6000, 10,null),
+(0002, 'HIREN', 8000, 20,null),
+(0003, 'ALI', 4000, 10, 0001),
+(0004, 'GEORGE', 6000, null, 0002);
+
+==========================================================
+Create S, P, J, SPJ tables as specified below and insert a few rows in each table:-
+SUPPLIER
+(S#, Sname, Status, City)
+-
+S
+PARTS
+(P#, Pname, Color, Weight, City)
+-
+P
+PROJECTS
+(J#, Jname, City)
+-
+J
+SUPPLIER-PARTS-PROJECT
+(S#, P#, J#, Qty)
+-
+SPJ
+Sample data for S# column:- ‘S1’, ‘S2’, ‘S3’, etc.
+Sample data for P# column:- ‘P1’, ‘P2’, ‘P3’, etc.
+Sample data for J# column:- ‘J1’, ‘J2’, ‘J3’, etc.
+Sample data for Status column:- 10, 20, 30, etc.
+
+#########################################################
+
+ create table s
+     (
+     `s#` char(4),
+     sname char(20),
+     status int(10),
+     city char(20)
+     );
+
+ create table p
+     (
+     `p#` char(4),
+     pname char(20),
+     color char(20),
+     weight varchar(20),
+     city char(20)
+     );
+
+create table j
+     (
+     `j#` char(4),
+     jname char(20),
+     city char(20)
+     );
+
+create table spj
+     (
+     `s#` char(4),
+	 `p#` char(4),
+	 `j#` char(4),
+     qty varchar(20)
+     );
+	 
+	 
+insert into s (`s#`, sname, status, city)values
+	('s1', 'pratya', 10, 'chopda'),
+	('s2', 'onkya', 30, 'kohlapur'),
+	('s3', 'visvya', 20, 'kohlapur'),
+	('s4', 'akshya', 10, 'nanded');
+	
+insert into p (`p#`, pname, color, weight, city)values
+	('p1', 'knuckle', 'silver', 400, 'chopda'),
+	('p2', 'tie rod', 'red', 150, 'kohlapur'),
+	('p3', 'shaft', 'black', 300, 'kohlapur'),
+	('p4', 'caliper', 'black', 900, 'nanded');	
+	
+insert into j (`j#`, jname, city)values
+	('j1', 'suspen', 'chopda'),
+	('j2', 'steering', 'kohlapur'),
+	('j3', 'transmission', 'kohlapur'),
+	('j4', 'brakes', 'nanded'),
+	('j5', 'design', 'dhule');
+	
+insert into spj (`s#`, `p#`, `j#`, qty)values
+	('s1', 'p2', 'j3', 100),
+	('s2', 'p4', 'j2', 70),
+	('s3', 'p3', 'j1', 80),
+	('s4', 'p1', 'j4', 40),
+	('s1', 'p3', 'j3', 70);
+	
+Write the SELECT queries to do the following:-
+
+==========================================================
+
+5. Display all the data from the S table.
+=>>
+ select * from s;
+
+==========================================================
+6. Display only the S# and SNAME fields from the S table.
+=>>
+ select `s#`, sname from s;
+
+
+==========================================================
+7. Display the PNAME and COLOR from the P table for the CITY=”kohlapur”.
+=>>
+ select pname, color from p where city='kohlapur';
+
+==========================================================
+8. Display all the Suppliers from chopda.
+=>>
+ select * from s where city='chopda';
+
+==========================================================
+9. Display all the Suppliers from chopda or kohlapur.
+=>>
+ select * from s where city in ('chopda','kohlapur');
+==========================================================
+10. Display all the Projects in Nanded.
+=>>
+select * from p where city in ('nanded');
+==========================================================
+11. Display all the Partnames with the weight between 150 and 400 (inclusive of both).
+=>>
+select pname, weight from p where weight between 150 and 400;
+
+==========================================================
+12. Display all the Suppliers with a Status greater than or equal to 20.
+=>>
+select * from s where status >=20;
+
+==========================================================
+13. Display all the Suppliers except the Suppliers from nanded.
+==>
+select * from s where city not in ('nanded');
+
+==========================================================
+14. Display only the Cities from where the Suppliers come from.
+==>
+select city from s;
+
+==========================================================
+15. Assuming that the Part Weight is in GRAMS, display the same in MILLIGRAMS and KILOGRAMS.
+==>
+select weight, weight*1000 as "killograms", weight/1000 as "milligrams" from p;
+
+==========================================================
