@@ -1,0 +1,38 @@
+Student ID 		:	200240320035
+Student Name 	:	Dipesh chaudhari
+Center 			:	Kharghar
+Assignment		:	SQL_Assign_12
+==========================================================
+
+1) Write a query that selects all customers whose ratings 
+are equal to or greater than ANY of Serres’.
+=>>
+ select * from customers 
+ where rating >= any (select rating from customers 
+ where snum =(select snum from salespeople where sname='serres'));
+
+==========================================================
+2) Write a query using ANY or ALL that will find all salespeople 
+who have no customers located in their city.
+=>>
+select * from salespeople 
+where (city, snum) not in 
+(select city, snum from customers);
+
+==========================================================
+3) Write a query that selects all orders for amounts
+ greater than any for the customers in London.
+=>>
+select * from orders 
+where amt >any (select amt from orders 
+where cnum in (select cnum from customers where city = 'london'));
+
+==========================================================
+4) Write the above query using MIN or MAX.
+=>>
+
+select * from orders
+where amt >any (select amt from orders 
+where cnum in (select min(cnum) from customers 
+where city = 'london'));
+==========================================================
